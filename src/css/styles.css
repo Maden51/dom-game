@@ -1,5 +1,5 @@
 :root {
-    --cell-size: 64px;
+    --cell-size: 150px;
 }
 
 body {
@@ -24,6 +24,7 @@ body {
 
 .cell {
     position: relative;
+    border: 1px solid black;
 }
 
 .map-tile {
@@ -36,4 +37,7 @@ body {
     height: var(--cell-size);
     position: absolute;
     z-index: 99;
+    background: url('../img/goblin.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }

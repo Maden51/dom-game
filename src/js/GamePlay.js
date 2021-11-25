@@ -4,6 +4,7 @@ export default class GamePlay {
     this.container = null;
     this.boardEl = null;
     this.cells = [];
+    this.goblin = null;
   }
 
   bindToDOM(container) {
@@ -27,6 +28,33 @@ export default class GamePlay {
       this.boardEl.appendChild(cellEl);
     }
     this.cells = Array.from(this.boardEl.children);
+  }
+
+  randomSpawn(position) {
+    this.goblin = document.querySelector('.goblin');
+    const cellEl = Array.from(document.getElementsByClassName('cell'))[position];
+    if (!this.goblin) {
+      const newGoblinEl = document.createElement('div');
+      newGoblinEl.classList.add('goblin');
+      cellEl.appendChild(newGoblinEl);
+      return;
+    }
+
+    cellEl.appendChild(this.goblin);
+  }
+
+  getNewPosition() {
+    this.goblin = document.querySelector('.goblin');
+    if (!this.goblin) {
+      return Math.round(Math.random() * (this.boardSize ** 2 - 1));
+    }
+    const cellEl = Array.from(document.getElementsByClassName('cell')).indexOf(this.goblin.parentElement);
+    this.position = cellEl;
+    let newPosition = this.position;
+    while (newPosition === this.position) {
+      newPosition = Math.round(Math.random() * (this.boardSize ** 2 - 1));
+    }
+    return newPosition;
   }
 
   checkBinding() {
